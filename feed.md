@@ -1,0 +1,11 @@
+Deep space dark background (#0D0F14 to #130D1E subtle vertical gradient). Ambient blurred purple radial glow blooms in the background — soft bokeh-style radial-gradient circles in deep purple/magenta at low opacity, static, decorative. Cards use dark gunmetal (#1A1825). Primary accent is electric purple (#7B35E8) for active chips, CTAs, and highlights. Secondary teal (#00778A) only for price tags. Coral red (#FF6B6B) for hot badges. Font: Epilogue (Google Fonts). Corners generously rounded (1rem–1.5rem). Inputs and interactive elements have no hard borders — just rgba(255,255,255,0.08) hairline. Glass-morphism (backdrop-filter: blur(12px) + semi-transparent dark) on sticky header and bottom nav. Hide all scrollbars.
+Sticky Glass Header
+Blurred dark glass. Top row: "Browse Events" bold white left + circular avatar button right (person icon, purple bg at 20% opacity). Below: full-width rounded-xl search input, dark gunmetal fill, search icon left in muted purple, placeholder grey text, purple focus ring.
+Category Chips Row
+Horizontally scrollable, no scrollbar. All active by default: solid purple fill, white text, soft purple glow shadow. Inactive pills: dark gunmetal fill, rgba(255,255,255,0.08) border, grey text. Icons + labels. Clicking toggles active state.
+"Trending Now" Section
+Header row: bold white title left + small purple "See all" right. Horizontally scrollable card row. Each card: w-72 h-44, rounded-2xl, full-bleed image, dark gradient overlay bottom-up. Badge pill top-left ("Hot Pick" coral; "Selling Fast" purple). Event name bold white bottom-left + date row with calendar icon. Image subtle scale on hover.
+"Nearby Events" Section
+Bold white heading. 3 stacked full-width cards (rounded-2xl, dark gunmetal bg, very subtle purple glow box-shadow). Top image h-48: heart button top-right (frosted glass circle, toggles on click), price tag bottom-left (purple bg, white bold text, top-right corner only rounded). Below image: event title bold white, location in grey with pin icon; date block top-right (dark bg square, month small purple uppercase, day large bold white).
+Bottom Tab Bar
+Fixed bottom, glass-effect, hairline top border. 4 tabs: Explore active (purple, filled icon, small purple dot below), others grey. Tiny uppercase tracked labels.

@@ -1,0 +1,301 @@
+/* Sign In Screen — inherits phone-frame, status-bar, bg-gradient, star, home-indicator from App.css */
+
+/* Main scrollable content area */
+.si-content {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  right: 0;
+  bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px 20px;
+  overflow: hidden;
+}
+
+/* Top bar with back button */
+.si-top-bar {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  margin-bottom: 4px;
+}
+
+.si-back-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 0.8px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Header: logo + titles */
+.si-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.si-logo-sm {
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background: radial-gradient(circle at 35% 35%, rgba(168, 85, 247, 0.9) 0%, rgba(134, 68, 251, 0.85) 25%, rgba(99, 51, 255, 0.8) 50%, rgba(79, 91, 251, 0.7) 75%, rgba(59, 130, 246, 0.6) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(99, 51, 255, 0.2);
+  margin-bottom: 14px;
+}
+
+.si-logo-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.si-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(168, 85, 247, 0.9);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.si-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.5px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.si-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+
+/* Form fields */
+.si-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.si-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.si-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.si-label {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.2px;
+}
+
+.si-forgot {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(168, 85, 247, 0.8);
+  text-decoration: none;
+}
+
+/* Input wrapper */
+.si-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.8px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.2s;
+}
+
+.si-input-wrap:focus-within {
+  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(168, 85, 247, 0.06);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.08);
+}
+
+.si-input-icon {
+  position: absolute;
+  left: 16px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.si-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0 46px 0 46px;
+  caret-color: rgba(168, 85, 247, 0.9);
+}
+
+.si-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.si-eye-btn {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+/* Sign In button */
+.si-btn-primary {
+  width: 100%;
+  height: 52px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(170deg, rgb(124, 58, 237) 0%, rgb(99, 102, 241) 100%);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.si-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+/* Divider */
+.si-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.si-divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.si-divider-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+/* Social buttons */
+.si-social-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.si-btn-social {
+  flex: 1;
+  height: 46px;
+  border-radius: 12px;
+  border: 0.8px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.si-btn-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Create account */
+.si-create-link {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.si-link {
+  color: rgba(168, 85, 247, 0.9);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Legal */
+.si-legal {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  margin-top: auto;
+}
+
+.si-legal-link {
+  color: rgba(168, 85, 247, 0.6);
+  text-decoration: none;
+}

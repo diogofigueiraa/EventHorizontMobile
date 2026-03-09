@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse Events - Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary":        "#7c3aed",
+          "primary-light":  "rgba(168,85,247,0.9)",
+          "background-dark": "#0d0d1a",
+          "card-dark":      "#14121f",
+          "accent-coral":   "#FF6B6B",
+        },
+        fontFamily: { "display": ["DM Sans", "sans-serif"] },
+        borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+      },
+    },
+  }
+</script>
+<style>
+  /* ── Page background ── */
+  body {
+    min-height: max(884px, 100dvh);
+    background: linear-gradient(180deg, #0d0d1a 0%, #0a0a14 100%);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ── Ambient bokeh blobs (matches App.tsx onboarding) ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(99,51,255,0.22) 0%, rgba(50,26,128,0.11) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    top: 240px;
+    right: -100px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(236,72,153,0.10) 0%, rgba(118,36,77,0.05) 35%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .blob3 {
+    position: fixed;
+    bottom: 80px;
+    left: -80px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Stars (scattered like onboarding) ── */
+  .star {
+    position: fixed;
+    background: #fff;
+    border-radius: 1px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Glass header ── */
+  .glass-effect {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background-color: rgba(13, 12, 26, 0.82);
+  }
+
+  /* ── Scrollbar hide ── */
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* ── Card glow (purple, matching onboarding logo shadow) ── */
+  .card-glow {
+    box-shadow: 0 0 20px rgba(99, 51, 255, 0.14);
+  }
+
+  /* ── Active chip (mirrors btn-primary from App.css / SignIn.css) ── */
+  .chip-active {
+    background: linear-gradient(170deg, rgb(124,58,237) 0%, rgb(99,102,241) 100%);
+    box-shadow: 0 4px 18px rgba(124, 58, 237, 0.40);
+  }
+  .chip-active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    pointer-events: none;
+  }
+
+  /* ── Search input (mirrors si-input-wrap from SignIn.css) ── */
+  .search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 0.8px solid rgba(255,255,255,0.10);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(168,85,247,0.50);
+    background: rgba(168,85,247,0.06);
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.10);
+  }
+  .search-wrap input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    padding: 0 16px 0 44px;
+    caret-color: rgba(168,85,247,0.9);
+  }
+  .search-wrap input::placeholder { color: rgba(255,255,255,0.28); }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    color: rgba(168,85,247,0.60);
+    pointer-events: none;
+    font-size: 20px;
+  }
+
+  /* ── Price / badge gradient ── */
+  .badge-gradient {
+    background: linear-gradient(135deg, rgb(124,58,237) 0%, rgb(99,102,241) 100%);
+  }
+
+  /* ── Date badge ── */
+  .date-badge {
+    background: rgba(255,255,255,0.06);
+    border: 0.8px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 48px;
+  }
+  .date-month {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(168,85,247,0.9);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .date-day {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+
+  /* ensure all z-index layers are above blobs */
+  * { position: relative; z-index: 1; }
+  .blob3, .star { z-index: 0; }
+</style>
+</head>
+<body class="font-display text-slate-100 antialiased">
+
+<!-- Ambient blobs -->
+<div class="blob3"></div>
+
+<!-- Scattered stars (matching onboarding) -->
+<div class="star" style="left:56px; top:68px; width:2px; height:2px; opacity:0.75;"></div>
+<div class="star" style="left:calc(100% - 100px); top:102px; width:1px; height:1px; opacity:0.18;"></div>
+<div class="star" style="left:30px; top:320px; width:1px; height:1px; opacity:0.55;"></div>
+<div class="star" style="left:calc(100% - 40px); top:500px; width:1px; height:1px; opacity:0.42;"></div>
+
+<div class="max-w-md mx-auto min-h-screen relative flex flex-col pb-24">
+
+  <!-- ── Sticky Glass Header ── -->
+  <header class="sticky top-0 z-50 glass-effect pt-4 px-4 pb-3" style="border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-2xl font-extrabold tracking-tight text-white" style="letter-spacing:-0.5px;">Browse Events</h1>
+      <button class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(99,51,255,0.20);">
+        <span class="material-symbols-outlined" style="color:rgba(168,85,247,0.9); font-size:20px;">person</span>
+      </button>
+    </div>
+    <div class="search-wrap">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input placeholder="Artists, venues, or cities..." type="text" />
+    </div>
+  </header>
+
+  <!-- ── Category Chips ── -->
+  <div class="flex gap-3 px-4 py-4 overflow-x-auto hide-scrollbar shrink-0">
+    <button class="chip-active relative flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-bold">
+      <span class="material-symbols-outlined text-[18px]">confirmation_number</span>
+      All
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.05); border:0.8px solid rgba(255,255,255,0.08); color:rgba(255,255,255,0.65);">
+      <span class="material-symbols-outlined text-[18px]">music_note</span>
+      Music
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.05); border:0.8px solid rgba(255,255,255,0.08); color:rgba(255,255,255,0.65);">
+      <span class="material-symbols-outlined text-[18px]">palette</span>
+      Arts
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.05); border:0.8px solid rgba(255,255,255,0.08); color:rgba(255,255,255,0.65);">
+      <span class="material-symbols-outlined text-[18px]">memory</span>
+      Tech
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.05); border:0.8px solid rgba(255,255,255,0.08); color:rgba(255,255,255,0.65);">
+      <span class="material-symbols-outlined text-[18px]">restaurant</span>
+      Food
+    </button>
+  </div>
+
+  <!-- ── Trending Now ── -->
+  <section class="mt-2">
+    <div class="px-4 flex justify-between items-end mb-4">
+      <h2 class="text-xl font-bold text-white">Trending Now</h2>
+      <a href="#" class="text-sm font-bold" style="color:rgba(168,85,247,0.85);">See all</a>
+    </div>
+    <div class="flex gap-4 overflow-x-auto px-4 hide-scrollbar">
+
+      <!-- Trending Card 1 -->
+      <div class="relative flex-none w-72 h-44 rounded-2xl overflow-hidden group">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCuQ3x06Dvr1i1ysILmjNaaIj4eofAuWoxHspYYH2B9GDoUl8taw-6s0mMrg7GmE93pe6QbfCa6klrvdjBnL7aS-wLScgpNwkSIpTL86013VoqY8jQEeFK-kmhWDNcPAi47AgjBvwrXeIysG99BXN8CODZquzQuvx1nsbHWGTkuqin60mfXHnCtKqrJNNb6L6sTSaDK7a2JIIMjtJKrew6fh97ALP6ZYCwZiXp8ZBbu-06XPk56-lqMEVWUvgRJ3KgJMtN4P8gmQIU');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="absolute top-3 left-3">
+          <span class="text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider" style="background:#FF6B6B;">Hot Pick</span>
+        </div>
+        <div class="absolute bottom-3 left-3 right-3">
+          <p class="text-white font-bold text-lg leading-tight mb-1">Neon Pulse Festival</p>
+          <div class="flex items-center gap-2 text-white/80 text-xs">
+            <span class="material-symbols-outlined text-sm">calendar_today</span>
+            <span>July 14–16</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending Card 2 -->
+      <div class="relative flex-none w-72 h-44 rounded-2xl overflow-hidden group">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCht4yc_X9wfeVKiRAhG1_BP4UliZRbjuddGchmBhGH52lvgdPs52Hx_jHg_KVYyYMMjA4Jec8O1MScE9LQNDPk3gHB-8uVaM9zwQhZK8kWs0MSvSCyXO1QIB726EP3jqP1dBvXfncbSsseik637VpYrc5acLnMLnmScsLkBTLLynNsz-PfJDCGCQMBLlsP9wUmyvFJfSfhZr57y2DFegdb55O55XwI9JoxkApYf0L4-7TZLdYPQ9hPFRKzV-GfCiqmy8cFBNU7AD4');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="absolute top-3 left-3">
+          <span class="text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider badge-gradient">Selling Fast</span>
+        </div>
+        <div class="absolute bottom-3 left-3 right-3">
+          <p class="text-white font-bold text-lg leading-tight mb-1">Canvas &amp; Cocktails</p>
+          <div class="flex items-center gap-2 text-white/80 text-xs">
+            <span class="material-symbols-outlined text-sm">calendar_today</span>
+            <span>Tomorrow, 7 PM</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Nearby Events ── -->
+  <section class="mt-8 px-4">
+    <h2 class="text-xl font-bold mb-4 text-white">Nearby Events</h2>
+    <div class="space-y-4">
+
+      <!-- Event Card 1 -->
+      <div class="rounded-2xl overflow-hidden card-glow" style="background:#14121f; border:0.8px solid rgba(255,255,255,0.07);">
+        <div class="h-48 w-full bg-cover bg-center relative"
+          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBmAr7jWp3j1prQO0jW8ngmIupATIlqOEaFbVCfuzRVZFyxJ-2Ea2J5D_7Xtd8aBn3RtVlIif0BSndLX2b-3Oy1oVUONLYvxistxRyzdeEdhvHGhY0aqBFY6AuXQltlawged59U5YOvvQ-nEyUXeM3BHPffr6zdFylh9LnzgHFvvnPNnKOHt42aIaA-hEfk6L19uZVIhRdUijCTMAsl14T3Kv6h-cugzv-_KxRSDTLai2fDISMQu2ylMDWKFCXIsUnrglKipIWTQdI');">
+          <div class="absolute top-3 right-3">
+            <button class="w-9 h-9 rounded-full flex items-center justify-center text-white" style="background:rgba(255,255,255,0.12); backdrop-filter:blur(8px);">
+              <span class="material-symbols-outlined text-[18px]">favorite</span>
+            </button>
+          </div>
+          <div class="absolute bottom-0 left-0 px-4 py-1 badge-gradient" style="border-radius:0 0.75rem 0 0;">
+            <span class="text-white text-xs font-bold uppercase">$25.00</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-lg leading-tight text-white">Taste of the Heights</h3>
+              <div class="flex items-center gap-1 text-sm mt-1" style="color:rgba(255,255,255,0.40);">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+                <span>Downtown Plaza</span>
+              </div>
+            </div>
+            <div class="date-badge">
+              <span class="date-month">Jun</span>
+              <span class="date-day">22</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Card 2 -->
+      <div class="rounded-2xl overflow-hidden card-glow" style="background:#14121f; border:0.8px solid rgba(255,255,255,0.07);">
+        <div class="h-48 w-full bg-cover bg-center relative"
+          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFtNINpckvnr2tEDXNZvgwwQjFGlDaN754NtXlJe9enQ2kG8o9rkpz36TEYrOyh8msk6AW4OthQyYOmisAoNNcZzr88WlihssoQ1Ja1UjD5eE4LnXEdBANtyq7gbXnA2ehA49NskVNUNrfBsZi_XizrlJWP7lX4dJs8P89xKg4KL3sCTvAu6pgYNP1FCdJQXJ__wU-g8X_BnO2_OMUMgVJD9SgViUXpRE49IsMKhy6tjPa7TZinconTDNwYbAjEBhstB37FHIoe_U');">
+          <div class="absolute top-3 right-3">
+            <button class="w-9 h-9 rounded-full flex items-center justify-center text-white" style="background:rgba(255,255,255,0.12); backdrop-filter:blur(8px);">
+              <span class="material-symbols-outlined text-[18px]">favorite</span>
+            </button>
+          </div>
+          <div class="absolute bottom-0 left-0 px-4 py-1 badge-gradient" style="border-radius:0 0.75rem 0 0;">
+            <span class="text-white text-xs font-bold uppercase">Free</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-lg leading-tight text-white">Future Tech Summit '24</h3>
+              <div class="flex items-center gap-1 text-sm mt-1" style="color:rgba(255,255,255,0.40);">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+                <span>Innovation Hub</span>
+              </div>
+            </div>
+            <div class="date-badge">
+              <span class="date-month">Jul</span>
+              <span class="date-day">05</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Card 3 -->
+      <div class="rounded-2xl overflow-hidden card-glow" style="background:#14121f; border:0.8px solid rgba(255,255,255,0.07);">
+        <div class="h-48 w-full bg-cover bg-center relative"
+          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCwJvIjj2AP4ZGKRcvIic_zTckI5FI5MUPZrbZgn6cpapBBSuXAFaaPXstWCxl9VisidJM0JiMy7IK0hXEANpvQViVMlijoxTZ8ieRyRjJBrSKfFcxOL9pdhUBCMYG92JeG9DXq5gQLQ7J0Ke-Yj8tYUnneGza9oHGL13-kc7T9lArirluBWAe-xwUFinrfapD9u6_Zw8jxSNXonKvyLyZxyk1veOZjyTaGDVEvCILM_pbGFoDHXNt9ZcqQ6WmS5h-J64gxsiw7vnM');">
+          <div class="absolute top-3 right-3">
+            <button class="w-9 h-9 rounded-full flex items-center justify-center text-white" style="background:rgba(255,255,255,0.12); backdrop-filter:blur(8px);">
+              <span class="material-symbols-outlined text-[18px]">favorite</span>
+            </button>
+          </div>
+          <div class="absolute bottom-0 left-0 px-4 py-1 badge-gradient" style="border-radius:0 0.75rem 0 0;">
+            <span class="text-white text-xs font-bold uppercase">$45.00</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-lg leading-tight text-white">Midnight Jazz Sessions</h3>
+              <div class="flex items-center gap-1 text-sm mt-1" style="color:rgba(255,255,255,0.40);">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+                <span>The Blue Note</span>
+              </div>
+            </div>
+            <div class="date-badge">
+              <span class="date-month">Jul</span>
+              <span class="date-day">12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Bottom Tab Bar ── -->
+  <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto glass-effect px-8 py-3 flex justify-between items-center" style="border-top:1px solid rgba(255,255,255,0.06);">
+    <button class="flex flex-col items-center gap-1" style="color:rgba(168,85,247,0.9);">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">explore</span>
+      <span class="text-[10px] font-bold uppercase tracking-widest">Explore</span>
+      <div class="w-1 h-1 rounded-full mt-0.5" style="background:rgba(168,85,247,0.9);"></div>
+    </button>
+    <button class="flex flex-col items-center gap-1" style="color:rgba(255,255,255,0.30);">
+      <span class="material-symbols-outlined">favorite</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest">Saved</span>
+    </button>
+    <button class="flex flex-col items-center gap-1" style="color:rgba(255,255,255,0.30);">
+      <span class="material-symbols-outlined">confirmation_number</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest">Tickets</span>
+    </button>
+    <button class="flex flex-col items-center gap-1" style="color:rgba(255,255,255,0.30);">
+      <span class="material-symbols-outlined">notifications</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest">Alerts</span>
+    </button>
+  </nav>
+
+</div>
+</body>
+</html>

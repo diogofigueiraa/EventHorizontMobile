@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse Events - Event Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00778a",
+                        "background-light": "#f0f2f4",
+                        "background-dark": "#121416",
+                        "accent-coral": "#ff6b6b",
+                        "card-dark": "#1C1F24",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background-color: rgba(18, 20, 22, 0.8);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .spotlight-glow {
+            box-shadow: 0 0 15px rgba(0, 119, 138, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="max-w-md mx-auto min-h-screen relative flex flex-col pb-24">
+<!-- Header & Search -->
+<header class="sticky top-0 z-50 glass-effect pt-4 px-4 pb-2">
+<div class="flex items-center justify-between mb-4">
+<h1 class="text-2xl font-bold tracking-tight">Browse Events</h1>
+<button class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-slate-200/50 dark:bg-slate-800/50 border-none rounded-xl focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-slate-800 transition-all placeholder:text-slate-500" placeholder="Artists, venues, or cities..." type="text"/>
+</div>
+</header>
+<!-- Category Chips -->
+<div class="flex gap-3 px-4 py-4 overflow-x-auto hide-scrollbar shrink-0">
+<button class="flex items-center gap-2 px-5 py-2 rounded-full bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">confirmation_number</span>
+<span class="text-sm font-semibold">All</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2 rounded-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-[20px]">music_note</span>
+<span class="text-sm font-medium">Music</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2 rounded-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+<span class="text-sm font-medium">Arts</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2 rounded-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-[20px]">memory</span>
+<span class="text-sm font-medium">Tech</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2 rounded-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+<span class="text-sm font-medium">Food</span>
+</button>
+</div>
+<!-- Trending Section -->
+<section class="mt-2">
+<div class="px-4 flex justify-between items-end mb-4">
+<h2 class="text-xl font-bold">Trending Now</h2>
+<a class="text-primary text-sm font-bold" href="#">See all</a>
+</div>
+<div class="flex gap-4 overflow-x-auto px-4 hide-scrollbar">
+<!-- Carousel Card 1 -->
+<div class="relative flex-none w-72 h-44 rounded-2xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Electronic music concert with neon lights and crowd" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCuQ3x06Dvr1i1ysILmjNaaIj4eofAuWoxHspYYH2B9GDoUl8taw-6s0mMrg7GmE93pe6QbfCa6klrvdjBnL7aS-wLScgpNwkSIpTL86013VoqY8jQEeFK-kmhWDNcPAi47AgjBvwrXeIysG99BXN8CODZquzQuvx1nsbHWGTkuqin60mfXHnCtKqrJNNb6L6sTSaDK7a2JIIMjtJKrew6fh97ALP6ZYCwZiXp8ZBbu-06XPk56-lqMEVWUvgRJ3KgJMtN4P8gmQIU');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute top-3 left-3">
+<span class="bg-accent-coral text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Hot Pick</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3">
+<p class="text-white font-bold text-lg leading-tight mb-1">Neon Pulse Festival</p>
+<div class="flex items-center gap-2 text-white/80 text-xs">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>July 14-16</span>
+</div>
+</div>
+</div>
+<!-- Carousel Card 2 -->
+<div class="relative flex-none w-72 h-44 rounded-2xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Modern art gallery exhibition with abstract paintings" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCht4yc_X9wfeVKiRAhG1_BP4UliZRbjuddGchmBhGH52lvgdPs52Hx_jHg_KVYyYMMjA4Jec8O1MScE9LQNDPk3gHB-8uVaM9zwQhZK8kWs0MSvSCyXO1QIB726EP3jqP1dBvXfncbSsseik637VpYrc5acLnMLnmScsLkBTLLynNsz-PfJDCGCQMBLlsP9wUmyvFJfSfhZr57y2DFegdb55O55XwI9JoxkApYf0L4-7TZLdYPQ9hPFRKzV-GfCiqmy8cFBNU7AD4');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute top-3 left-3">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Selling Fast</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3">
+<p class="text-white font-bold text-lg leading-tight mb-1">Canvas &amp; Cocktails</p>
+<div class="flex items-center gap-2 text-white/80 text-xs">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>Tomorrow, 7 PM</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Event List -->
+<section class="mt-8 px-4">
+<h2 class="text-xl font-bold mb-4">Nearby Events</h2>
+<div class="space-y-4">
+<!-- Event Card 1 -->
+<div class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden spotlight-glow border border-slate-100 dark:border-slate-800 transition-all active:scale-[0.98]">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Outdoor food festival with stalls and sunset" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBmAr7jWp3j1prQO0jW8ngmIupATIlqOEaFbVCfuzRVZFyxJ-2Ea2J5D_7Xtd8aBn3RtVlIif0BSndLX2b-3Oy1oVUONLYvxistxRyzdeEdhvHGhY0aqBFY6AuXQltlawged59U5YOvvQ-nEyUXeM3BHPffr6zdFylh9LnzgHFvvnPNnKOHt42aIaA-hEfk6L19uZVIhRdUijCTMAsl14T3Kv6h-cugzv-_KxRSDTLai2fDISMQu2ylMDWKFCXIsUnrglKipIWTQdI');">
+<div class="absolute top-3 right-3">
+<button class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 bg-primary px-4 py-1 rounded-tr-xl">
+<span class="text-white text-xs font-bold uppercase">$25.00</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg leading-tight">Taste of the Heights</h3>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Downtown Plaza</span>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 rounded-lg p-2 flex flex-col items-center min-w-[48px]">
+<span class="text-xs font-bold text-primary uppercase">Jun</span>
+<span class="text-lg font-bold leading-none">22</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden spotlight-glow border border-slate-100 dark:border-slate-800 transition-all active:scale-[0.98]">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Sleek technology conference stage with large screen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFtNINpckvnr2tEDXNZvgwwQjFGlDaN754NtXlJe9enQ2kG8o9rkpz36TEYrOyh8msk6AW4OthQyYOmisAoNNcZzr88WlihssoQ1Ja1UjD5eE4LnXEdBANtyq7gbXnA2ehA49NskVNUNrfBsZi_XizrlJWP7lX4dJs8P89xKg4KL3sCTvAu6pgYNP1FCdJQXJ__wU-g8X_BnO2_OMUMgVJD9SgViUXpRE49IsMKhy6tjPa7TZinconTDNwYbAjEBhstB37FHIoe_U');">
+<div class="absolute top-3 right-3">
+<button class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 bg-primary px-4 py-1 rounded-tr-xl">
+<span class="text-white text-xs font-bold uppercase">Free</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg leading-tight">Future Tech Summit '24</h3>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Innovation Hub</span>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 rounded-lg p-2 flex flex-col items-center min-w-[48px]">
+<span class="text-xs font-bold text-primary uppercase">Jul</span>
+<span class="text-lg font-bold leading-none">05</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="bg-white dark:bg-card-dark rounded-2xl overflow-hidden spotlight-glow border border-slate-100 dark:border-slate-800 transition-all active:scale-[0.98]">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Intimate jazz club with musician playing saxophone" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCwJvIjj2AP4ZGKRcvIic_zTckI5FI5MUPZrbZgn6cpapBBSuXAFaaPXstWCxl9VisidJM0JiMy7IK0hXEANpvQViVMlijoxTZ8ieRyRjJBrSKfFcxOL9pdhUBCMYG92JeG9DXq5gQLQ7J0Ke-Yj8tYUnneGza9oHGL13-kc7T9lArirluBWAe-xwUFinrfapD9u6_Zw8jxSNXonKvyLyZxyk1veOZjyTaGDVEvCILM_pbGFoDHXNt9ZcqQ6WmS5h-J64gxsiw7vnM');">
+<div class="absolute top-3 right-3">
+<button class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 bg-primary px-4 py-1 rounded-tr-xl">
+<span class="text-white text-xs font-bold uppercase">$45.00</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg leading-tight">Midnight Jazz Sessions</h3>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>The Blue Note</span>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 rounded-lg p-2 flex flex-col items-center min-w-[48px]">
+<span class="text-xs font-bold text-primary uppercase">Jul</span>
+<span class="text-lg font-bold leading-none">12</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Tab Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto glass-effect border-t border-slate-100 dark:border-slate-800 px-8 py-3 flex justify-between items-center">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-1">explore</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Explore</span>
+<div class="w-1 h-1 bg-primary rounded-full mt-0.5"></div>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Saved</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Tickets</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Alerts</span>
+</button>
+</nav>
+</div>
+</body></html>

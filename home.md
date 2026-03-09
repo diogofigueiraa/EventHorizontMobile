@@ -1,0 +1,15 @@
+Build a mobile event discovery home screen called Browse Events.
+Visual Identity & Design System
+Dark-first UI. Background is near-black (#0D0F14). Cards use a slightly lighter dark (#1C1F24). Primary accent is teal (#00778A) for active states, price tags, and category pills. Secondary accent coral red (#FF6B6B) for hot badges. Glass-morphism (backdrop-filter: blur(12px)) on the sticky header and bottom nav bar. Font: Epilogue (Google Fonts). Generously rounded corners (1rem–1.5rem). Subtle box-shadow glow on cards using teal at low opacity. Hide scrollbars on all horizontal scroll containers.
+Sticky Glass Header
+Blurred dark glass background, sticks to top on scroll. Two rows: top row has "Browse Events" bold title left + circular avatar button right (person icon, teal bg at 20% opacity). Below it, a full-width rounded search input — search icon left inside the field, placeholder "Artists, venues, or cities...", dark fill (#1C1F24), rounded-xl, focus ring in teal.
+Category Chips Row
+Horizontally scrollable pill row with no visible scrollbar. Pills have an icon + label. All is active by default: solid teal bg, white text, shadow. Inactive pills: dark card bg, subtle border, grey text. Chips: All (ticket icon), Music (note icon), Arts (palette icon), Tech (chip icon), Food (restaurant icon). Clicking a chip toggles it active.
+"Trending Now" Section
+Section heading "Trending Now" bold left + "See all" teal small link right. Horizontally scrollable row of 2 cards, no scrollbar. Each card: w-72 h-44, rounded-2xl, full-bleed background image, dark gradient overlay bottom-up, coloured badge pill top-left ("Hot Pick" in coral; "Selling Fast" in teal), event name bold white bottom-left, date row below it with calendar icon. Subtle scale-up on hover (group-hover:scale-105) on the image layer.
+"Nearby Events" Section
+Section heading "Nearby Events" bold. Vertical stack of 3 full-width cards (rounded-2xl, dark card bg, subtle teal glow border). Each card structure: top h-48 image area with heart/favourite button top-right (frosted glass circle button, toggles filled on click), price tag bottom-left (teal bg, white bold uppercase text, only top-right corner rounded). Below image: left side has event title bold + location row (pin icon + venue name in grey); right side has a small date block (dark bg, month in teal tiny uppercase, day number large bold).
+Bottom Tab Bar
+Fixed to bottom, max-width container centred, glass-effect, top border. 4 tabs evenly spaced: Explore (active: teal colour, filled icon variant, small teal dot indicator below label), Saved, Tickets, Alerts (all inactive: grey, hover to teal). Labels in tiny uppercase tracked text below each icon.
+Interactions
+Category chips toggle active state on click. Heart buttons toggle filled/unfilled on click. Horizontal scroll rows are touch/mouse draggable with no visible scrollbar.

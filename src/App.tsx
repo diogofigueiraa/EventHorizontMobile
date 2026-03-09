@@ -1,4 +1,6 @@
 import './App.css'
+import SignIn from './SignIn'
+import BrowseEvents from './BrowseEvents'
 
 const imgIconSignal = 'https://www.figma.com/api/mcp/asset/72fd8337-5356-40d9-8748-fec14fa70f3f'
 const imgIconWifi = 'https://www.figma.com/api/mcp/asset/f964528f-aa32-417a-97aa-cb3d0d73e72e'
@@ -12,6 +14,15 @@ const imgIconGoogle = 'https://www.figma.com/api/mcp/asset/dd0bee0d-a719-49df-98
 const imgIconApple = 'https://www.figma.com/api/mcp/asset/ed2d2aef-76a0-48dc-b08e-c0924a6afdd9'
 
 export default function App() {
+  const screen = new URLSearchParams(window.location.search).get('screen')
+  if (screen === 'signin') return <SignIn />
+  if (screen === 'browse') {
+    return (
+      <div className="phone-frame">
+        <BrowseEvents />
+      </div>
+    )
+  }
   return (
     <div className="phone-frame">
       {/* Background gradients */}
